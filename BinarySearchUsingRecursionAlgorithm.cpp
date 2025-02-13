@@ -89,3 +89,17 @@ int main()
         cout << "The number " << UserValue << " was not found.";
     }
 }
+
+/*
+
+Time complexity:
+Overall Time Complexity:
+-> Sorting: O(N log N)
+-> BinarySearch: O(log N)
+-> Finding all occurences: O(K)
+---> O(N log N) + O(log N) + O(K) = O(N log N) + O(K)
+If K is small:
+-> Best case: O(N log N)
+-> Worst case: O(N log N)
+-> Average case: O(N log N)
+*/
