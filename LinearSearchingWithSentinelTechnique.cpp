@@ -26,7 +26,7 @@ If such an element exists, at which position in array M is it located?
     //Remove the Extra Element Added at the End
     Array.pop_back(); 
 
-    //Return the List of Found Indices
+    //Return the List of Found Positions
     return positions; 
  }
 
