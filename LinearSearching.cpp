@@ -1,6 +1,7 @@
-/* Giả sử chúng ta có một mảng M gồm N phần tử.
- Vấn đề đặt ra là có hay không phần tử có giá trị bằng X trong mảng M?
- Nếu có thì phần tử có giá trị bằng X là phần tử thứ mấy trong mảng M? */
+/* Suppose we have an array M consisting of N elements.
+The problem is to determine whether there exists an element with a value equal to X in array M.
+If such an element exists, at which position in array M is it located?
+(Regular Linear Searching) */
 
  #include <bits/stdc++.h>
  
@@ -8,11 +9,14 @@
 
  vector<int> LinearSearching(vector<int> Array, int SearchValue)
 {
-    vector<int> indices;
+    vector<int> positions; //Stores the positions where SearchValue is found.
+
+    //Iterate Through the Array Using a FOR Loop
     for (int i = 0; i < Array.size(); i++)
         if (Array[i] == SearchValue)
-        indices.push_back(i);
-    return indices;
+        positions.push_back(i);
+ //Return the List of Found Positions
+    return positions;
 }
 
 int main()
@@ -35,14 +39,32 @@ int main()
     vector<int> result = LinearSearching(Array, UserValue);
 
     //Print the result
-    if (!result.empty())
+    if (!result.empty()) // Check if the 'result' list is not empty (meaning the number was found)
     {
         cout << "The number " << UserValue << " was found at indices: ";
-        for (int idx : result)
-            cout << idx << " ";
+        for (int idx : result) // Iterate through each element in the 'result' list
+            cout << idx << " "; // Print the index of each occurrence
     }
-    else 
+    else // If the 'result' list is empty (meaning the number was not found)
     {
-        cout << "The number " << UserValue << " was not found." << endl;
+        cout << "The number " << UserValue << " was not found." << endl; // Print a message indicating that the number was not found in the list
     }
 }
+/*
+Time Complexity:
+-> Best case: O(1) if the element is found at the beginning.
+-> Average case: 𝑂(𝑁).
+-> Worst case: O(N) if the element is not in the array or is at the last position
+*/
+
+/*
+Stoping Condition:
+-> Checks each element and also verifies if it has reached the end of the list.
+*/
+/*\
+Performance:
+-> Requires two checks in each iteration (value comparison + boundary check).
+*/
+
+
+
