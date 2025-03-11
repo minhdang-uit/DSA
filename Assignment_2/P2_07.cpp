@@ -19,7 +19,7 @@ void linearSearch(vector<int> &A)
     int x; cin >> x;
 
     bool found = false;
-    for (int i = A.size() - 1; i >= 0; i--)
+    for (int i = 0; i < A.size(); i++)
         if (A[i] == x)
            {
             cout << i;
@@ -27,7 +27,6 @@ void linearSearch(vector<int> &A)
             break;
            }
     if (!found) cout << "No Find";
-        
 }
 
 int main() {
