@@ -32,8 +32,8 @@ void binarySearch(vector<int> &A)
         cout << "Left=" << left << " " << "Right=" << right << " " << "Mid=" << mid << endl;
 
         if (A[mid] == x) return ;
-        else if (A[mid] < x ) left = mid + 1;
-            else right = mid - 1;
+        else if (A[mid] < x ) right = mid - 1;
+            else left = mid + 1;
     }
 }
 
