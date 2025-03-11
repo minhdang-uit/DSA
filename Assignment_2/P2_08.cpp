@@ -16,7 +16,7 @@ void Input(vector<int> &A)
 
 void linearSearch(vector<int> &A)
 {
-    int x; cin >> x;
+    int x; cin >> ws >> x;
 
     bool found = false;
     for (int i = A.size() - 1; i >= 0; i--)
@@ -24,7 +24,6 @@ void linearSearch(vector<int> &A)
            {
             cout << i;
             found = true;
-            break;
            }
     if (!found) cout << "No Find";
         
