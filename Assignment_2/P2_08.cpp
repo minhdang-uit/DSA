@@ -16,17 +16,17 @@ void Input(vector<int> &A)
 
 void linearSearch(vector<int> &A)
 {
-    int x; cin >> ws >> x;
+    int x; cin >> x;
 
     bool found = false;
     for (int i = A.size() - 1; i >= 0; i--)
         if (A[i] == x)
            {
-            cout << i;
+            cout << i << endl;
             found = true;
+            break;
            }
-    if (!found) cout << "No Find";
-        
+    if (!found) cout << "No Find" << endl;
 }
 
 int main() {
