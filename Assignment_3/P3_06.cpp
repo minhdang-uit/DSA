@@ -1,3 +1,10 @@
+/*Sắp xếp mảng một chiều các số nguyên tăng dần bằng phương pháp Selection sort. Danh sách A được nhập giá trị các phần tử và không giới hạn số lượng phần tử. Dừng thêm phần tử vào A nếu giá trị phần tử được nhập bằng 0 và không thêm số 0 vào danh sách A. 
+
+INPUT 
+Nhập giá trị các phần tử của danh sách A. 
+OUTPUT 
+Xuất ra các bước i thể hiện quá trình sắp xếp tăng dần bằng SelectionSort*/
+
 /*###Begin banned keyword - each of the following line if appear in code will raise error. regex supported
 ###End banned keyword*/
 
@@ -10,30 +17,34 @@ using namespace std;
 void Input(vector<int> &A)
 {
     int x;
-    while(cin >> x && x != 0)
+    while (cin >> x && x != 0)
         A.push_back(x);
 }
 
-void printArray(const vector<int> &A)
+void printArray(vector<int> &A)
 {
     for (int i = 0; i < A.size(); i++)
         cout << A[i] << " ";
     cout << endl;
 }
-void insertionSort(vector<int> &A)
+void selectionSort(vector<int> A)
 {
-    for (int i = 1; i < A.size(); i++)
+    bool swapped;
+    for (int i = 0; i < A.size() - 1; i++)
     {
-        int e = A[i];
-        int j = i - 1;
-        while (j >= 0 && A[j] > e)
+        int min_idx = i;
+        swapped = false;
+        for (int j = i + 1; j < A.size(); j++)
         {
-            A[j+1] = A[j];
-            j--;
+            if (A[j] > A[min_idx])
+                min_idx = j;
+                swapped = true;
         }
-        A[j+1] = e;
-
-        cout << "i=" << i << ": e=" << e << ": ";
+        if (swapped)
+        {
+        swap(A[i], A[min_idx]);
+        }
+        cout << "i=" << i << ":" << " ";
         printArray(A);
     }
 }
@@ -41,6 +52,6 @@ void insertionSort(vector<int> &A)
 int main() {
 	vector<int> A;
 	Input(A);
-	insertionSort(A);
+	selectionSort(A);
 	return 0;
 }
