@@ -17,7 +17,7 @@ OUTPUT
 
 using namespace std;
 
-const int MAXN = 10000;
+const int MAXN = 100000;
 
 void NhapMang(int a[], int &n)
 {
