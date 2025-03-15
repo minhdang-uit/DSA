@@ -1,6 +1,17 @@
 /*###Begin banned keyword - each of the following line if appear in code will raise error. regex supported
 ###End banned keyword*/
 
+/*Sắp xếp mảng một chiều các số nguyên tăng dần bằng phương pháp selection sort. Biết rằng số lượng phần tử của mảng < 100,000; giá trị các phần tử < 1 tỷ.
+
+INPUT
+Dãy các số trong đó: (Giả sử luôn thỏa điều kiện nhập)
+
+Số nguyên đầu tiên: số lượng phần tử của mảng
+Các số nguyên còn lại: giá trị của các phần tử của mảng
+ 
+
+OUTPUT
+"true" nếu mảng sắp xếp thành công. "false" nếu mảng sắp không thành công.*/
 
 #include <bits/stdc++.h>
 
