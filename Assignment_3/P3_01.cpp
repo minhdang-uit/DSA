@@ -1,6 +1,3 @@
-/*###Begin banned keyword - each of the following line if appear in code will raise error. regex supported
-###End banned keyword*/
-
 /*Sắp xếp mảng một chiều các số nguyên tăng dần bằng phương pháp selection sort. Biết rằng số lượng phần tử của mảng < 100,000; giá trị các phần tử < 1 tỷ.
 
 INPUT
@@ -19,9 +16,9 @@ using namespace std;
 
 const int MAXN = 100000;
 
-void NhapMang(int a[], int &n)
+void NhapMang(int a[], int n)
 {
-		
+
 }
 
 void selection_sort_ascending(int a[], int n)
@@ -31,7 +28,7 @@ void selection_sort_ascending(int a[], int n)
 
 bool is_ascending(int a[], int n)
 {
-	return true
+	return true;
 }
 
 int main() {
@@ -47,4 +44,3 @@ int main() {
 
     return 0;
 }
-//bị giáo viên troll :))
