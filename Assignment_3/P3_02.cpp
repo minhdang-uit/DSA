@@ -60,5 +60,5 @@ int main() {
 
     XuatMang(a, n);
 
-    return 0;
+    return 0;   
 }
