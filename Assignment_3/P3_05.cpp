@@ -26,7 +26,7 @@ void insertionSort(vector<int> &A)
     {
         int e = A[i];
         int j = i - 1;
-        while (j >= 0 && A[j] > e)
+        while (j >= 0 && A[j] < e)
         {
             A[j+1] = A[j];
             j--;
