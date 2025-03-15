@@ -26,12 +26,13 @@ void linearSearch(vector<int> &A)
         if (A[i] == x && i % 2)
             result.push_back(i);
 
-    if (!result.empty()) {
+    if (!result.empty()) 
+    {
         for (int i = 0; i < result.size(); i++)
             cout << result[i] << " ";
         cout << endl;
     }
-    else cout << "No Find";
+        else cout << "No Find";
 }
 int main() {
 	vector<int> A;
@@ -39,3 +40,4 @@ int main() {
 	linearSearch(A);
 	return 0;
 }
+
