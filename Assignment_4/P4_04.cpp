@@ -30,37 +30,40 @@ void Input(vector<int> &v)
 
 int partition(vector<int> &arr, int left, int right)
 {
-    int pivot = arr[right];
-    int i = left - 1;
+   int pivot = arr[(left + right) / 2];
+   int i = left, j = right;
 
-    for (int j = 0; j < right - 1; j++)
-        if (arr[j] < pivot)
-            {
-                i++;
-                swap(arr[i], arr[j]);
-            }
-    swap(arr[i + 1], arr[right]);
-    return i + 1;
-}
-
-void quickSort(vector<int> &arr, int left, int right, int &count)
-{
-    if (left < right)
+    while (i <= j)
     {
-        int pi = partition(arr, left, right);
-        quickSort(arr, left, pi - 1, count);
-        quickSort(arr, pi + 1, right, count);
-        count++;
+        while (arr[i] < pivot)
+            i++;
+        while (arr[j] > pivot)
+            j--;
+        if (i <= j)
+        {
+            swap(arr[i], arr[j]);
+            i++;
+            j--;
+        }
     }
+    return i;
 }
 
+int QuickSort(vector<int>& arr, int left, int right) {
+    int cnt = 0;
+    if (left < right) {
+        cnt++;
+        int pi = partition(arr, left, right);
+        cnt += QuickSort(arr, left, pi - 1);
+        cnt += QuickSort(arr, pi, right);
+    }
+    return cnt;
+}
 void Sort(vector<int> &arr)
-{
-    int count = 0;
+{   
     if (!arr.empty())
-        quickSort(arr,0, arr.size() - 1, count);
-    
-    cout << count;
+        cout << QuickSort(arr,0, arr.size() - 1);
+    else cout << 0;
 }
 
 int main() {
