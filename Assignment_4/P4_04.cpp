@@ -49,21 +49,27 @@ int partition(vector<int> &arr, int left, int right)
     return i;
 }
 
-int QuickSort(vector<int>& arr, int left, int right) {
-    int cnt = 0;
-    if (left < right) {
-        cnt++;
-        int pi = partition(arr, left, right);
-        cnt += QuickSort(arr, left, pi - 1);
-        cnt += QuickSort(arr, pi, right);
-    }
-    return cnt;
+int quickSort(vector<int> &a, int left, int right)
+{
+    if (left >= right) return 1; 
+	int cnt = 1; 
+    int x = a[(left+right)/2], i = left, j = right;
+	while(i < j) 
+    {
+		while (a[i] < x) 
+            i++; 
+		while (a[j] > x) 
+            j--;
+		if (i <= j)
+			swap(a[i++], a[j--]);
+	}
+	if (left < j) cnt += quickSort(a, left, j);
+    if (right > i) cnt += quickSort(a, i, right);    
+    return cnt;       
 }
-void Sort(vector<int> &arr)
-{   
-    if (!arr.empty())
-        cout << QuickSort(arr,0, arr.size() - 1);
-    else cout << 0;
+
+void Sort(vector <int> arr) {
+    if (!arr.empty()) cout << quickSort(arr, 0, (int)arr.size() - 1); 
 }
 
 int main() {
