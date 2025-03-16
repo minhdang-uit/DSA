@@ -22,7 +22,7 @@ void Heapify(vector<int> &a, int n, int i)
     int largest = i;
     int left = 2 * i + 1;
     int right = 2 * i + 2;
-    
+
     if (left < n && a[left] > a[largest])
         largest = left;
     if (right < n && a[right] > a[largest])
@@ -35,27 +35,29 @@ void Heapify(vector<int> &a, int n, int i)
         }
 }
 
-void buildHeap(vector<int> &a, int n)
+void BuildHeap(vector<int> &a, int n)
 {
     for (int i = n / 2 - 1; i >= 0; i--)
-        Heapify(a, n, i);    
+        Heapify(a, n, i);
 }
 
-void HeapSort(vector<int> &a, int n) {
-    buildHeap(a, n);
-    for (int i = n - 1; i > 0; i--) {
+void HeapSort(vector<int> &a, int n)
+{
+    BuildHeap(a, n);
+    for (int i = n-1; i > 0; i--)
+    {
         cout << "N=" << n << ": swap " << a[i] << " - " << a[0] << endl;
         swap(a[0], a[i]);
         n--;
-        Heapify(a, n, 0);
+        Heapify(a,n,0);
     }
 }
 
-void Sort(vector<int> a) {
+void Sort(vector<int> a)
+{
     int n = a.size();
     HeapSort(a, n);
 }
-
 int main() {
 	vector<int> A;
 	Input(A);
