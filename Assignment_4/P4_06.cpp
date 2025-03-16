@@ -1,6 +1,17 @@
 /*###Begin banned keyword - each of the following line if appear in code will raise error. regex supported
 ###End banned keyword*/
+/*Sắp xếp danh sách A tăng dần bằng phương pháp HeapSort.
 
+Hiển thị 2 giá trị hoán vị đầu - cuối của danh sách A trong mỗi lần hiệu chỉnh.
+
+Danh sách A được nhập giá trị các phần tử và không giới hạn số lượng phần tử. Dừng thêm phần tử vào A nếu giá trị phần tử được nhập bằng 0 và không thêm số 0 vào danh sách A. 
+
+
+INPUT
+Nhập giá trị các phần tử của danh sách A.  
+OUTPUT
+N là số lượng phần tử trong danh sách A cần được sắp xếp ở mỗi lần hiệu chỉnh.
+Xuất 2 giá trị đầu - cuối của danh sách A trong mỗi lần hiệu chỉnh theo mô tả.*/
 #include <iostream>
 #include <time.h>
 #include <vector>
