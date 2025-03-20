@@ -1,52 +1,63 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-struct Node {
+struct Node
+{
     int data;
     Node* next;
-    Node(int value) {
+    Node(int value)
+    {
         data = value;
         next = nullptr;
     }
 };
 
-struct LIST {
+struct LIST 
+{
     Node* pHead;
     Node* pTail;
-    LIST() {
+    LIST() 
+    {
         pHead = nullptr;
         pTail = nullptr;
     }
 };
 
-void CreateEmptyList(LIST& L) {
+void CreateEmptyList(LIST& L)
+ {
     L.pHead = nullptr;
     L.pTail = nullptr;
 }
 
 void InsertAtTail(LIST& L, int value) {
     Node* newNode = new Node(value);
-    if (L.pHead == nullptr) {
+    if (L.pHead == nullptr) 
+    {
         L.pHead = L.pTail = newNode;
-    } else {
+    } 
+    else 
+    {
         L.pTail->next = newNode;
         L.pTail = newNode;
     }
 }
 
-void CreateList(LIST& L) {
+void CreateList(LIST& L) 
+{
     int value;
-    while (true) {
+    while (true) 
+    {
         cin >> value;
         if (value == -1) break;
         InsertAtTail(L, value);
     }
 }
 
-string searchX(Node* head, int X) {
-    for (Node* current = head; current != nullptr; current = current->next) {
+string searchX(Node* head, int X) 
+{
+    for (Node* current = head; current != nullptr; current = current->next) 
         if (current->data == X) return "true";
-    }
+        
     return "false"; 
 }
 
