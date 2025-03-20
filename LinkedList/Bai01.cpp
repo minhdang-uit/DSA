@@ -55,7 +55,9 @@ void PrintList(const LIST& L) {
 int main() {
     LIST L;
 	CreateEmptyList(L);
+
 	CreateList(L);
     PrintList(L);
+
     return 0;
 }
