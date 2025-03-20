@@ -19,13 +19,20 @@ int main() {
 		/// right: 0, left: 1
 		int x, y;
 		cin >> x >> y;
+		
+		/// cat x, noi phai x va trai x
 		r_x = a[x][0];
 		l_x = a[x][1];
-		a[r_x][1] = l_x;
 		a[l_x][0] = r_x;
+		a[r_x][1] = l_x;
+		
+		/// chen x vao giua y va trai y
 		l_y = a[y][1];
-		a[y][1] = x;
 		a[l_y][0] = x;
+		a[y][1] = x;
+		
+		/// update trai va phai cua x sau khi chen
+		a[x][0] = y;
 		a[x][1] = l_y;
 	}
 	int tmp = a[1][1];
