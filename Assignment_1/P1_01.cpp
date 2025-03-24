@@ -18,7 +18,7 @@ Nếu tìm thấy, xuất true. Ngược lại xuất false.*/
 
 using namespace std;
 
-void NhapMang(int a[], int n)
+void NhapMang(int (&a)[], int &n)
 {
     cin >> n;
     for (int i = 0; i < n; i++)
