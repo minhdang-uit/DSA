@@ -17,12 +17,12 @@ int binary_search_greatestLesser_last_occurrence(int a[], int n, int x)
         int mid = (left + right) / 2;
         if (a[mid] >= x)
         {
-            result = mid;
+            
             right = mid - 1;
         }
         else
-        {
-            
+        {     
+            result = mid;
             left = mid + 1;
         }
     }

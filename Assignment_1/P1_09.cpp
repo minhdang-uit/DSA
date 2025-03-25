@@ -17,14 +17,14 @@ int binary_search_leastGreater_firstOccurrence(int a[], int n, int x)
     while (left <= right)
     {
         int mid = (left + right) / 2;
-        if (a[mid] > x)
+        if (a[mid] < x)
         {
-            pos = mid;
-            right = mid - 1;
+            left = mid + 1;
         }
         else
         {
-            left = mid + 1;
+            pos = mid;
+            right = mid - 1;
         }
         
     }
