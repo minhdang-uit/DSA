@@ -1,17 +1,3 @@
-/*Sắp xếp mảng một chiều các số nguyên giảm dần bằng phương pháp selection sort. Biết rằng số lượng phần tử của mảng <= 30,000; giá trị các phần tử < 1 tỷ.
-
-INPUT
-Dãy các số trong đó: (Giả sử luôn thỏa điều kiện nhập)
-
-Số nguyên đầu tiên: số lượng phần tử của mảng
-Các số nguyên còn lại: giá trị của các phần tử của mảng
-OUTPUT
-Xuất trên 2 dòng liền kề nhau:
-- Dòng 1: Xuất số lượng phần tử mảng
-- Dòng 2: Xuất danh sách đã được sắp xếp, mỗi phần tử cách nhau 1 khoảng trắng. Nếu mảng rỗng thì dòng này trống*/
-/*###Begin banned keyword - each of the following line if appear in code will raise error. regex supported
-###End banned keyword*/
-
 
 #include <iostream>
 #define MAXN 100000
@@ -27,21 +13,15 @@ void hoanvi(int &x, int &y){
     y=temp;
 }
 
-void selection_sort_decending(int A[], int &N)
+void selection_sort_decending(int a[], int &n)
 {
-    bool swapped;
-    for (int i = 0; i < N-1; i++)
+    for (int i = 0; i < n - 1; i++)
     {
         int max_idx = i;
-        swapped = false;
-        for (int j = i + 1; j < N; j++)
-        {
-            if (A[j] > A[max_idx])
+        for (int j = i + 1; j < n; j++)
+            if (a[max_idx] < a[j])
                 max_idx = j;
-                swapped = true;
-        }
-        if (swapped) 
-            hoanvi(A[i], A[max_idx]);
+        hoanvi(a[i], a[max_idx]);
     }
 }
 
@@ -60,5 +40,5 @@ int main() {
 
     XuatMang(a, n);
 
-    return 0;   
+    return 0;
 }

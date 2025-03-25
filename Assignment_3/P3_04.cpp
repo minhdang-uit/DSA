@@ -1,5 +1,3 @@
-/*###Begin banned keyword - each of the following line if appear in code will raise error. regex supported
-###End banned keyword*/
 
 #include <iostream>
 #include <time.h>
@@ -9,32 +7,25 @@ using namespace std;
 
 void Input(vector<int> &A)
 {
-    int x;
-    while(cin >> x && x != 0)
-        A.push_back(x);
+    int num;
+    while (cin >> num && num != 0)
+        A.push_back(num);
 }
 
-void printArray(const vector<int> &A)
-{
-    for (int i = 0; i < A.size(); i++)
-        cout << A[i] << " ";
-    cout << endl;
-}
 void insertionSort(vector<int> &A)
 {
     for (int i = 1; i < A.size(); i++)
     {
-        int e = A[i];
-        int j = i - 1;
-        while (j >= 0 && A[j] > e)
+        int key = A[i], j = i - 1;
+        while (j >= 0 && A[j] > key)
         {
             A[j+1] = A[j];
             j--;
         }
-        A[j+1] = e;
-
-        cout << "i=" << i << ": e=" << e << ": ";
-        printArray(A);
+        A[j+1] = key;
+        cout << "i="<< i << " " << "e=" << key << " ";
+            for (int num : A) cout << num << " ";
+            cout << endl;
     }
 }
 

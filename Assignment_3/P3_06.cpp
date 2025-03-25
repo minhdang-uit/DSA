@@ -29,23 +29,17 @@ void printArray(vector<int> &A)
 }
 void selectionSort(vector<int> &A)
 {
-    bool swapped;
     for (int i = 0; i < A.size() - 1; i++)
     {
         int min_idx = i;
-        swapped = false;
         for (int j = i + 1; j < A.size(); j++)
-        {
-            if (A[j] < A[min_idx])
+            if (A[min_idx] > A[j])
                 min_idx = j;
-                swapped = true;
-        }
-        if (swapped)
-        {
         swap(A[i], A[min_idx]);
-        }
-        cout << "i=" << i << ":" << " ";
-        printArray(A);
+        cout << "i=" << i << ": ";
+        for (int num : A)
+            cout << num << " ";
+        cout << endl;
     }
 }
 
