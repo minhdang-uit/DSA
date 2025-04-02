@@ -61,7 +61,7 @@ void CreateList(LIST &list)
 bool is_prime(int n)
 {
     if (n < 2) return false;
-    for (int i = 2; i <= sqrt(n); i++)
+    for (int i = 2; i * i <= n; i++)
         if (n % i == 0)
             return false;
     return true;
@@ -90,6 +90,11 @@ void add_after_all_prime(LIST &L, int Y)
 
 void PrintList(LIST L)
 {
+    if (L.pHead == NULL)
+    {
+        cout << "Empty List." << endl;
+        return;
+    }
     node p = L.pHead;
 
     while (p != NULL)

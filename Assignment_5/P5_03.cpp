@@ -40,7 +40,8 @@ void AddTail(LIST &list, NODE* p) {
         list.pHead = p; 
         list.pTail = list.pHead; 
     }
-    else {
+    else 
+    {
         list.pTail->pNext = p; 
         list.pTail = p; 
     }
