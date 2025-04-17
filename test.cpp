@@ -1,20 +1,19 @@
-/*###Begin banned keyword - each of the following line if appear in code will raise error. regex supported
-###End banned keyword*/
+#include <bits/stdc++.h>
 
-#include <iostream>
-#include <queue>
 using namespace std;
 
-struct TNODE {
-	int key;
-	TNODE* pLeft;
-	TNODE* pRight;
+struct NODE
+{
+    int key;
+    NODE *pLeft;
+    NODE *pRight;
 };
-typedef TNODE* TREE;
+
+typedef struct NODE *TREE;
 
 TREE CreateNode(int x)
 {
-    TREE p = new TNODE;
+    TREE p = new NODE;
     if (p == NULL) exit(1);
     p->key = x;
     p->pLeft = p->pRight = NULL;
@@ -43,39 +42,64 @@ void CreateTree(TREE &tree)
         InsertNode(tree, val);
 }
 
-void PrintLevel(TREE &tree, int x, int &level)
+void FindSiblings(TREE tree, int x)
 {
-    int depth = 0;
-    while (tree != NULL)
+    if (tree == NULL)
     {
-        if (tree->key == x)
-        {
-            level = depth;
-            return;
-        }
-        else if (x < tree->key)
-            tree = tree->pLeft;
-        else
-            tree = tree->pRight;
-        ++depth;
+        cout << "Empty Tree.";
+        return;
     }
-    level = -1;
+
+    if (tree->key == x)
+    {    
+        cout << x << " is Root.";
+        return;
+    }
+
+    TREE parent = NULL, sibling = NULL;
+
+    while (tree != NULL) {
+        if (tree->pLeft && tree->pLeft->key == x) {
+            parent = tree;
+            sibling = tree->pRight;
+            break;
+        }
+        if (tree->pRight && tree->pRight->key == x) {
+            parent = tree;
+            sibling = tree->pLeft;
+            break;
+        }
+
+        if (x < tree->key) tree = tree->pLeft;
+        else tree = tree->pRight;
+    }
+
+    if (parent == NULL) 
+    {
+        cout << "Not found " << x << ".";
+    } else if (sibling == NULL) 
+    {
+        cout << x << " has no siblings.";
+    } 
+    else 
+    {
+       
+        if (parent->pLeft && parent->pLeft->key == x)
+            cout << x << " and " << sibling->key << " are siblings.";
+        else
+            cout << sibling->key << " and " << x << " are siblings.";
+    }
 }
 
-
 int main() {
-	TNODE* T;
-	int x, level=-1;
-
-	cin >> x;
-
-	T = NULL;
+	TREE T;
+	T = NULL; 
 	CreateTree(T);
 
-	if(T==NULL) cout << "Empty Tree.";
-	else {
-		PrintLevel(T, x, level);
-		cout << level;
-	}
+	int x;
+	cin >> x;
+
+	FindSiblings(T, x);
+
 	return 0;
 }
