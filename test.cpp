@@ -1,105 +1,62 @@
-#include <bits/stdc++.h>
+/*###Begin banned keyword - each of the following line if appear in code will raise error. regex supported
+###End banned keyword*/
 
+#include <iostream>
 using namespace std;
 
-struct NODE
-{
-    int key;
-    NODE *pLeft;
-    NODE *pRight;
+struct TNODE {
+	int key;
+	TNODE* pLeft;
+	TNODE* pRight;
 };
+typedef TNODE* TREE;
 
-typedef struct NODE *TREE;
-
-TREE CreateNode(int x)
-{
-    TREE p = new NODE;
-    if (p == NULL) exit(1);
+TNODE* CreateNode(int x) {
+    TNODE* p = new TNODE;
     p->key = x;
-    p->pLeft = p->pRight = NULL;
+    p->pLeft = NULL;
+    p->pRight = NULL;
     return p;
 }
 
-void CreateEmptyTree(TREE &tree)
-{
-    tree = NULL;
-}
-
-void InsertNode(TREE &tree, int x)
-{
-    if (tree == NULL)
-        tree = CreateNode(x);
-    else if (x < tree->key)
-        InsertNode(tree->pLeft, x);
-    else
-        InsertNode(tree->pRight, x);
-}
-
-void CreateTree(TREE &tree)
-{
-    int val;
-    while (cin >> val && val != -1)
-        InsertNode(tree, val);
-}
-
-void FindSiblings(TREE tree, int x)
-{
-    if (tree == NULL)
-    {
-        cout << "Empty Tree.";
-        return;
-    }
-
-    if (tree->key == x)
-    {    
-        cout << x << " is Root.";
-        return;
-    }
-
-    TREE parent = NULL, sibling = NULL;
-
-    while (tree != NULL) {
-        if (tree->pLeft && tree->pLeft->key == x) {
-            parent = tree;
-            sibling = tree->pRight;
-            break;
-        }
-        if (tree->pRight && tree->pRight->key == x) {
-            parent = tree;
-            sibling = tree->pLeft;
-            break;
-        }
-
-        if (x < tree->key) tree = tree->pLeft;
-        else tree = tree->pRight;
-    }
-
-    if (parent == NULL) 
-    {
-        cout << "Not found " << x << ".";
-    } else if (sibling == NULL) 
-    {
-        cout << x << " has no siblings.";
-    } 
-    else 
-    {
-       
-        if (parent->pLeft && parent->pLeft->key == x)
-            cout << x << " and " << sibling->key << " are siblings.";
-        else
-            cout << sibling->key << " and " << x << " are siblings.";
+void InsertNode(TREE& T, int x) {
+    if (T == NULL) {
+        T = CreateNode(x);
+    } else {
+        if (x < T->key)
+            InsertNode(T->pLeft, x);
+        else if (x > T->key)
+            InsertNode(T->pRight, x);
     }
 }
+
+void CreateTree(TREE& T) {
+    int x;
+    while (cin >> x && x != -1) {
+        if (x < 1000)
+            InsertNode(T, x);
+    }
+}
+
+int TongSoNodeTrai_LonHon_TongSoNodePhai_1dv(TREE T) {
+    if (T == NULL) return 0;
+    int leftCount = TongSoNodeTrai_LonHon_TongSoNodePhai_1dv(T->pLeft);
+    int rightCount = TongSoNodeTrai_LonHon_TongSoNodePhai_1dv(T->pRight);
+    if (leftCount == rightCount + 1) {
+        cout << T->key << " ";
+    }
+    return 1 + leftCount + rightCount;
+}
+
 
 int main() {
-	TREE T;
-	T = NULL; 
+	TREE T; //hay: TNODE* T;
+	T = NULL; // Khoi tao cay T rong, or: CreateEmptyTree(T)
+
 	CreateTree(T);
 
-	int x;
-	cin >> x;
-
-	FindSiblings(T, x);
+	if(T==NULL) cout << "Empty Tree.";
+	else TongSoNodeTrai_LonHon_TongSoNodePhai_1dv(T);
 
 	return 0;
 }
