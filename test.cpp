@@ -1,5 +1,3 @@
-/*###Begin banned keyword - each of the following line if appear in code will raise error. regex supported
-###End banned keyword*/
 
 #include <iostream>
 using namespace std;
@@ -11,52 +9,103 @@ struct TNODE {
 };
 typedef TNODE* TREE;
 
-TNODE* CreateNode(int x) {
-    TNODE* p = new TNODE;
+TREE CreateNode(int x)
+{
+    TREE p = new TNODE;
     p->key = x;
     p->pLeft = NULL;
     p->pRight = NULL;
     return p;
 }
 
-void InsertNode(TREE& T, int x) {
-    if (T == NULL) {
-        T = CreateNode(x);
-    } else {
-        if (x < T->key)
-            InsertNode(T->pLeft, x);
-        else if (x > T->key)
-            InsertNode(T->pRight, x);
+void Insert(TREE &tree, int x)
+{
+    if (tree == NULL)
+    {
+        tree = CreateNode(x);
+        return;
     }
+
+    if (x == tree->key) return;
+    if (x < tree->key) Insert(tree->pLeft, x);
+    else Insert(tree->pRight, x);
 }
 
-void CreateTree(TREE& T) {
+void CreateTree(TREE &tree)
+{
     int x;
-    while (cin >> x && x != -1) {
-        if (x < 1000)
-            InsertNode(T, x);
+    while (true)
+    {
+        cin >> x;
+        if (x == -1) break;
+        Insert(tree, x);
     }
 }
 
-int TongSoNodeTrai_LonHon_TongSoNodePhai_1dv(TREE T) {
-    if (T == NULL) return 0;
-    int leftCount = TongSoNodeTrai_LonHon_TongSoNodePhai_1dv(T->pLeft);
-    int rightCount = TongSoNodeTrai_LonHon_TongSoNodePhai_1dv(T->pRight);
-    if (leftCount == rightCount + 1) {
-        cout << T->key << " ";
+TREE Findmin(TREE tree)
+{
+    while (tree && tree->pLeft != NULL)
+        tree = tree->pLeft;
+    return tree;
+}
+
+void DeleteNode(TREE &tree, int x)
+{
+    if (tree == NULL) return;
+    
+    if (x < tree->key)
+        DeleteNode(tree->pLeft, x);
+    else if (x > tree->key)
+        DeleteNode(tree->pRight, x);
+    else
+    {
+        if (tree->pLeft == NULL)
+        {
+            TREE tmp = tree->pRight;
+            delete tree;
+            tree = tmp;
+        }
+        else if (tree->pRight == NULL)
+        {
+            TREE tmp = tree->pLeft;
+            delete tree;
+            tree = tmp;
+        }
+        else
+        {
+            TREE tmp = Findmin(tree->pRight);
+            tree->key = tmp->key;
+            DeleteNode(tree->pRight, tmp->key);
+        }        
     }
-    return 1 + leftCount + rightCount;
+}
+
+void NLR(TREE tree) {
+    if (tree == NULL) return;
+    cout << tree->key << ' '; 
+    NLR(tree->pLeft); 
+    NLR(tree->pRight); 
+}
+
+void PrintTree(TREE tree) {
+    if (tree == NULL) {
+        cout << "Empty Tree."; 
+        return; 
+    }
+    NLR(tree); 
 }
 
 
 int main() {
 	TREE T; //hay: TNODE* T;
 	T = NULL; // Khoi tao cay T rong, or: CreateEmptyTree(T)
-
 	CreateTree(T);
 
-	if(T==NULL) cout << "Empty Tree.";
-	else TongSoNodeTrai_LonHon_TongSoNodePhai_1dv(T);
+	int x;
+	cin >> x;
 
+	DeleteNode(T, x);
+
+	PrintTree(T);
 	return 0;
 }
