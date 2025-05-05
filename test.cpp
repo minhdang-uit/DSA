@@ -18,94 +18,59 @@ TREE CreateNode(int x)
     return p;
 }
 
-void Insert(TREE &tree, int x)
+void InsertNode(TREE &T, int x)
 {
-    if (tree == NULL)
+    if (T == NULL)
     {
-        tree = CreateNode(x);
+        T = CreateNode(x);
         return;
     }
 
-    if (x == tree->key) return;
-    if (x < tree->key) Insert(tree->pLeft, x);
-    else Insert(tree->pRight, x);
+    if (x == T->key) return;
+    else if (x < T->key) InsertNode(T->pLeft, x);
+    else InsertNode(T->pRight, x);    
 }
 
-void CreateTree(TREE &tree)
+void CreateTree(TREE &T)
 {
     int x;
     while (true)
     {
         cin >> x;
         if (x == -1) break;
-        Insert(tree, x);
+        InsertNode(T, x);
     }
 }
 
-TREE Findmin(TREE tree)
+int CountNodes(TREE T)
 {
-    while (tree && tree->pLeft != NULL)
-        tree = tree->pLeft;
-    return tree;
+    if (T == NULL) return 0;
+    return 1 + CountNodes(T->pLeft) + CountNodes(T->pRight);
 }
 
-void DeleteNode(TREE &tree, int x)
+void TongSoNodeTrai_LonHon_TongSoNodePhai_1dv(TREE T)
 {
-    if (tree == NULL) return;
+    if (T == NULL) return;
+
+    TongSoNodeTrai_LonHon_TongSoNodePhai_1dv(T->pLeft);  // L
+    TongSoNodeTrai_LonHon_TongSoNodePhai_1dv(T->pRight); // R
     
-    if (x < tree->key)
-        DeleteNode(tree->pLeft, x);
-    else if (x > tree->key)
-        DeleteNode(tree->pRight, x);
-    else
-    {
-        if (tree->pLeft == NULL)
-        {
-            TREE tmp = tree->pRight;
-            delete tree;
-            tree = tmp;
-        }
-        else if (tree->pRight == NULL)
-        {
-            TREE tmp = tree->pLeft;
-            delete tree;
-            tree = tmp;
-        }
-        else
-        {
-            TREE tmp = Findmin(tree->pRight);
-            tree->key = tmp->key;
-            DeleteNode(tree->pRight, tmp->key);
-        }        
-    }
-}
+    int countLeft = CountNodes(T->pLeft);
+    int countRight = CountNodes(T->pRight);
+    if (countLeft == countRight + 1)
+        cout << T->key << " ";  // N
 
-void NLR(TREE tree) {
-    if (tree == NULL) return;
-    cout << tree->key << ' '; 
-    NLR(tree->pLeft); 
-    NLR(tree->pRight); 
+    
 }
-
-void PrintTree(TREE tree) {
-    if (tree == NULL) {
-        cout << "Empty Tree."; 
-        return; 
-    }
-    NLR(tree); 
-}
-
 
 int main() {
 	TREE T; //hay: TNODE* T;
 	T = NULL; // Khoi tao cay T rong, or: CreateEmptyTree(T)
+
 	CreateTree(T);
 
-	int x;
-	cin >> x;
+	if(T==NULL) cout << "Empty Tree.";
+	else TongSoNodeTrai_LonHon_TongSoNodePhai_1dv(T);
 
-	DeleteNode(T, x);
-
-	PrintTree(T);
 	return 0;
 }
