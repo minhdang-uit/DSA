@@ -1,76 +1,68 @@
 
 #include <iostream>
 using namespace std;
+#define M 100
 
-struct TNODE {
-	int key;
-	TNODE* pLeft;
-	TNODE* pRight;
+struct NODE {
+    int key;
+    NODE *pNext;
 };
-typedef TNODE* TREE;
+// Khai báo kiểu con trỏ chỉ node
+typedef NODE *NODEPTR;
+typedef NODEPTR HASHTABLE[M];
 
-TREE CreateNode(int x)
-{
-    TREE p = new TNODE;
-    p->key = x;
-    p->pLeft = NULL;
-    p->pRight = NULL;
-    return p;
+NODE* CreateNode(int x) {
+	NODE* p;
+	p = new NODE;
+	p->key = x;
+	p->pNext = NULL;
+	return p;
 }
-
-void InsertNode(TREE &T, int x)
-{
-    if (T == NULL)
-    {
-        T = CreateNode(x);
-        return;
-    }
-
-    if (x == T->key) return;
-    else if (x < T->key) InsertNode(T->pLeft, x);
-    else InsertNode(T->pRight, x);    
-}
-
-void CreateTree(TREE &T)
-{
-    int x;
-    while (true)
-    {
-        cin >> x;
-        if (x == -1) break;
-        InsertNode(T, x);
+void AddTail(NODE* &head, int x) {
+	NODE *p=CreateNode(x);
+    if (head == NULL) head = p;
+	else {
+        NODE* i=head;
+        while(i->pNext!=NULL){
+            i=i->pNext;
+        }
+        i->pNext=p;
     }
 }
 
-int CountNodes(TREE T)
-{
-    if (T == NULL) return 0;
-    return 1 + CountNodes(T->pLeft) + CountNodes(T->pRight);
+int HF(int numbucket, int key) { return key % numbucket; }
+
+void CreateHashTable(HASHTABLE &H, int &numbucket) {
+    cin >> numbucket;
+    for(int i = 0; i <numbucket; i++){
+        H[i] = NULL;
+    }
+    int key;
+    while(true){
+        cin >> key;
+        if(key == -1) break;
+        int b = HF(numbucket, key);
+        AddTail(H[b], key);
+    }
 }
 
-void TongSoNodeTrai_LonHon_TongSoNodePhai_1dv(TREE T)
-{
-    if (T == NULL) return;
-
-    TongSoNodeTrai_LonHon_TongSoNodePhai_1dv(T->pLeft);  // L
-    TongSoNodeTrai_LonHon_TongSoNodePhai_1dv(T->pRight); // R
-    
-    int countLeft = CountNodes(T->pLeft);
-    int countRight = CountNodes(T->pRight);
-    if (countLeft == countRight + 1)
-        cout << T->key << " ";  // N
-
-    
+void Traverse(HASHTABLE &H, int numbucket) {
+    for(int i=0; i<numbucket; i++){
+        cout << i;
+        NODE* p = H[i];
+        while(p != NULL){
+            cout << " --> " << p->key;
+            p = p->pNext;
+        }
+        cout << endl;
+    }
 }
+int main(){
+    HASHTABLE H;
+    int numbucket;
 
-int main() {
-	TREE T; //hay: TNODE* T;
-	T = NULL; // Khoi tao cay T rong, or: CreateEmptyTree(T)
+    CreateHashTable(H, numbucket);
+    Traverse(H, numbucket);
 
-	CreateTree(T);
-
-	if(T==NULL) cout << "Empty Tree.";
-	else TongSoNodeTrai_LonHon_TongSoNodePhai_1dv(T);
-
-	return 0;
+    return 0;
 }
